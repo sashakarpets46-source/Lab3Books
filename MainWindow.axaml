@@ -1,9 +1,225 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="Lab3Books.MainWindow"
-        Title="Lab3Books">
-    Welcome to Avalonia!
+        Title="Бібліотечна система"
+        Width="800"
+        Height="600"
+        MinWidth="700"
+        MinHeight="450"
+        Background="#D9FFC2"
+        FontFamily="Cascadia Code">
+
+    <Window.Styles>
+        <Style Selector="Button">
+            <Setter Property="Background" Value="#4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Padding" Value="10,6"/>
+            <Setter Property="Margin" Value="0,5,5,5"/>
+        </Style>
+
+        <Style Selector="TextBox">
+            <Setter Property="Padding" Value="5,4"/>
+            <Setter Property="Margin" Value="0,3,0,5"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <Style Selector="ComboBox">
+            <Setter Property="Margin" Value="0,3,0,5"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+
+        <Style Selector="GroupBox">
+            <Setter Property="Margin" Value="0,0,0,6"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="BorderBrush" Value="#E0F2D8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style Selector="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="#263526"/>
+        </Style>
+    </Window.Styles>
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="2,0,2,8">
+            <TextBlock Text="БІБЛІОТЕЧНА СИСТЕМА"
+                       FontSize="17"
+                       FontWeight="Bold"
+                       Foreground="#31532A"/>
+
+            <TextBlock Text="Додавання книг та аналіз бібліотечного фонду"
+                       FontSize="10"
+                       Foreground="#58744F"/>
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1"
+                      VerticalScrollBarVisibility="Auto"
+                      HorizontalScrollBarVisibility="Disabled">
+
+            <StackPanel Spacing="5">
+
+                <GroupBox Header="Нова книга">
+                    <StackPanel Spacing="3">
+
+                        <Grid ColumnDefinitions="190,*">
+                            <TextBlock Grid.Column="0"
+                                       Text="Тип книги:"
+                                       VerticalAlignment="Center"/>
+
+                            <ComboBox x:Name="BookTypeComboBox"
+                                      Grid.Column="1"
+                                      SelectedIndex="0"
+                                      SelectionChanged="BookTypeComboBox_SelectionChanged"
+                                      HorizontalAlignment="Left"
+                                      Width="200">
+                                <ComboBoxItem Content="Художня книга"/>
+                                <ComboBoxItem Content="Наукова книга"/>
+                            </ComboBox>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="190,*">
+                            <TextBlock Grid.Column="0"
+                                       Text="Автор:"
+                                       VerticalAlignment="Center"/>
+                            <TextBox x:Name="AuthorTextBox"
+                                     Grid.Column="1"
+                                     PlaceholderText="Введіть ім'я автора"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="190,*">
+                            <TextBlock Grid.Column="0"
+                                       Text="Кількість сторінок:"
+                                       VerticalAlignment="Center"/>
+                            <TextBox x:Name="PageCountTextBox"
+                                     Grid.Column="1"
+                                     PlaceholderText="Наприклад, 250"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="190,*">
+                            <TextBlock Grid.Column="0"
+                                       Text="Мова:"
+                                       VerticalAlignment="Center"/>
+                            <TextBox x:Name="LanguageTextBox"
+                                     Grid.Column="1"
+                                     Text="Українська"/>
+                        </Grid>
+
+                        <StackPanel x:Name="FictionFieldsPanel"
+                                    Spacing="3">
+
+                            <Grid ColumnDefinitions="190,*">
+                                <TextBlock Grid.Column="0"
+                                           Text="Жанр художньої книги:"
+                                           VerticalAlignment="Center"/>
+                                <TextBox x:Name="GenreTextBox"
+                                         Grid.Column="1"
+                                         PlaceholderText="Наприклад, фантастика"/>
+                            </Grid>
+
+                            <Grid ColumnDefinitions="190,*">
+                                <TextBlock Grid.Column="0"
+                                           Text="Кількість видань:"
+                                           VerticalAlignment="Center"/>
+                                <TextBox x:Name="PublicationCountTextBox"
+                                         Grid.Column="1"
+                                         PlaceholderText="Наприклад, 5"/>
+                            </Grid>
+                        </StackPanel>
+
+                        <StackPanel x:Name="ScientificFieldsPanel"
+                                    Spacing="3"
+                                    IsVisible="False">
+
+                            <Grid ColumnDefinitions="190,*">
+                                <TextBlock Grid.Column="0"
+                                           Text="Тема наукової книги:"
+                                           VerticalAlignment="Center"/>
+                                <TextBox x:Name="TopicTextBox"
+                                         Grid.Column="1"
+                                         PlaceholderText="Наприклад, штучний інтелект"/>
+                            </Grid>
+
+                            <Grid ColumnDefinitions="190,*">
+                                <TextBlock Grid.Column="0"
+                                           Text="Кількість цитувань:"
+                                           VerticalAlignment="Center"/>
+                                <TextBox x:Name="CitationCountTextBox"
+                                         Grid.Column="1"
+                                         PlaceholderText="Наприклад, 100"/>
+                            </Grid>
+                        </StackPanel>
+
+                        <Button Content="Додати книгу"
+                                HorizontalAlignment="Left"
+                                Click="AddBookButton_Click"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Список книг">
+                    <StackPanel Spacing="5">
+                        <TextBlock x:Name="BookCountTextBlock"
+                                   Text="Кількість книг: 0"
+                                   FontWeight="Bold"/>
+
+                        <ListBox x:Name="BooksListBox"
+                                 MinHeight="70"
+                                 MaxHeight="130"
+                                 Background="White"
+                                 BorderBrush="#E0E0E0"
+                                 BorderThickness="1"/>
+
+                        <Button Content="Прочитати вибрану книгу"
+                                HorizontalAlignment="Left"
+                                Click="ReadBookButton_Click"/>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Аналітика">
+                    <Grid ColumnDefinitions="190,*"
+                          RowDefinitions="Auto,Auto,Auto,Auto">
+
+                        <TextBlock Grid.Row="0" Grid.Column="0"
+                                   Text="Мова для аналізу:"
+                                   VerticalAlignment="Center"/>
+
+                        <TextBox x:Name="AnalysisLanguageTextBox"
+                                 Grid.Row="0" Grid.Column="1"
+                                 Text="Українська"/>
+
+                        <Button Grid.Row="1" Grid.Column="1"
+                                Content="Порахувати сторінки"
+                                HorizontalAlignment="Left"
+                                Click="AnalyzeButton_Click"/>
+
+                        <TextBlock Grid.Row="2" Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   Text="Результат:"
+                                   FontWeight="Bold"
+                                   Margin="0,8,0,2"/>
+
+                        <TextBlock x:Name="AnalysisResultTextBlock"
+                                   Grid.Row="3" Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   Text="Результат аналізу з'явиться тут."
+                                   TextWrapping="Wrap"
+                                   FontWeight="Bold"
+                                   Foreground="#287A3D"
+                                   Margin="0,3,0,2"/>
+                    </Grid>
+                </GroupBox>
+
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
 </Window>
