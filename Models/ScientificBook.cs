@@ -1,8 +1,9 @@
 using System;
+using Lab3Books.Models.Interfaces;
 
 namespace Lab3Books.Models;
 
-public class ScientificBook : Book
+public class ScientificBook : Book, ICitationCalculable
 {
     private string topic = string.Empty;
 
@@ -22,6 +23,8 @@ public class ScientificBook : Book
         }
     }
 
+    public int CitationCount { get; set; }
+
     public ScientificBook(
         string author,
         int pageCount,
@@ -30,6 +33,7 @@ public class ScientificBook : Book
         : base(author, pageCount, language)
     {
         Topic = topic;
+        CitationCount = 0;
     }
 
     public double CalculateCitationIndex(int citationCount)
@@ -52,6 +56,7 @@ public class ScientificBook : Book
     public override string GetDescription()
     {
         return $"Наукова література. Автор: {Author}; " +
-               $"тема: {Topic}; сторінок: {PageCount}; мова: {Language}.";
+               $"тема: {Topic}; сторінок: {PageCount}; " +
+               $"мова: {Language}; цитувань: {CitationCount}.";
     }
 }

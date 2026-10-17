@@ -1,8 +1,10 @@
+
 using System;
+using Lab3Books.Models.Interfaces;
+
 namespace Lab3Books.Models;
 
-
-public abstract class Book
+public abstract class Book : IPrintable, IComparableBook
 {
     private int pageCount;
 
@@ -53,4 +55,19 @@ public abstract class Book
     }
 
     public abstract string GetDescription();
+
+    public string GetInfo()
+    {
+        return GetDescription();
+    }
+
+    public bool IsLongerThan(Book other)
+    {
+        if (other == null)
+        {
+            throw new ArgumentNullException(nameof(other));
+        }
+
+        return PageCount > other.PageCount;
+    }
 }

@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,5 +30,32 @@ public class BookAnalysis
                     language,
                     StringComparison.OrdinalIgnoreCase))
             .Sum(book => book.PageCount);
+    }
+
+    public static ScientificBook? GetBookWithMaxCitations(
+        List<Book> books)
+    {
+        if (books == null)
+        {
+            throw new ArgumentNullException(nameof(books));
+        }
+
+        ScientificBook? bestBook = null;
+
+        foreach (Book book in books)
+        {
+            if (book is not ScientificBook scientificBook)
+            {
+                continue;
+            }
+
+            if (bestBook == null ||
+                scientificBook.CitationCount > bestBook.CitationCount)
+            {
+                bestBook = scientificBook;
+            }
+        }
+
+        return bestBook;
     }
 }

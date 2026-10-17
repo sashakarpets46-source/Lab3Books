@@ -3,7 +3,7 @@
         x:Class="Lab3Books.MainWindow"
         Title="Бібліотечна система"
         Width="800"
-        Height="600"
+        Height="750"
         MinWidth="700"
         MinHeight="450"
         Background="#D9FFC2"
@@ -115,9 +115,7 @@
                                      Text="Українська"/>
                         </Grid>
 
-                        <StackPanel x:Name="FictionFieldsPanel"
-                                    Spacing="3">
-
+                        <StackPanel x:Name="FictionFieldsPanel" Spacing="3">
                             <Grid ColumnDefinitions="190,*">
                                 <TextBlock Grid.Column="0"
                                            Text="Жанр художньої книги:"
@@ -140,7 +138,6 @@
                         <StackPanel x:Name="ScientificFieldsPanel"
                                     Spacing="3"
                                     IsVisible="False">
-
                             <Grid ColumnDefinitions="190,*">
                                 <TextBlock Grid.Column="0"
                                            Text="Тема наукової книги:"
@@ -187,29 +184,40 @@
 
                 <GroupBox Header="Аналітика">
                     <Grid ColumnDefinitions="190,*"
-                          RowDefinitions="Auto,Auto,Auto,Auto">
+                          RowDefinitions="Auto,Auto,Auto,Auto,Auto">
 
-                        <TextBlock Grid.Row="0" Grid.Column="0"
+                        <TextBlock Grid.Row="0"
+                                   Grid.Column="0"
                                    Text="Мова для аналізу:"
                                    VerticalAlignment="Center"/>
 
                         <TextBox x:Name="AnalysisLanguageTextBox"
-                                 Grid.Row="0" Grid.Column="1"
+                                 Grid.Row="0"
+                                 Grid.Column="1"
                                  Text="Українська"/>
 
-                        <Button Grid.Row="1" Grid.Column="1"
+                        <Button Grid.Row="1"
+                                Grid.Column="1"
                                 Content="Порахувати сторінки"
                                 HorizontalAlignment="Left"
                                 Click="AnalyzeButton_Click"/>
 
-                        <TextBlock Grid.Row="2" Grid.Column="0"
+                        <Button Grid.Row="2"
+                                Grid.Column="1"
+                                Content="Знайти книгу з максимальним цитуванням"
+                                HorizontalAlignment="Left"
+                                Click="FindMaxCitationsButton_Click"/>
+
+                        <TextBlock Grid.Row="3"
+                                   Grid.Column="0"
                                    Grid.ColumnSpan="2"
                                    Text="Результат:"
                                    FontWeight="Bold"
                                    Margin="0,8,0,2"/>
 
                         <TextBlock x:Name="AnalysisResultTextBlock"
-                                   Grid.Row="3" Grid.Column="0"
+                                   Grid.Row="4"
+                                   Grid.Column="0"
                                    Grid.ColumnSpan="2"
                                    Text="Результат аналізу з'явиться тут."
                                    TextWrapping="Wrap"
@@ -217,6 +225,106 @@
                                    Foreground="#287A3D"
                                    Margin="0,3,0,2"/>
                     </Grid>
+                </GroupBox>
+
+                <GroupBox Header="Демонстрація інтерфейсів">
+                    <StackPanel Spacing="5">
+
+                        <TextBlock Text="IPrintable — інформація про книгу"
+                                   FontWeight="Bold"
+                                   TextWrapping="Wrap"/>
+
+                        <Button Content="Отримати інформацію про вибрану книгу"
+                                HorizontalAlignment="Left"
+                                Click="PrintBookInfoButton_Click"/>
+
+                        <TextBlock x:Name="InterfaceInfoTextBlock"
+                                   Text="Виберіть книгу зі списку."
+                                   TextWrapping="Wrap"
+                                   Foreground="#287A3D"/>
+
+                        <Separator/>
+
+                        <TextBlock Text="ICitationCalculable — індекс цитування"
+                                   FontWeight="Bold"
+                                   TextWrapping="Wrap"/>
+
+                        <Grid ColumnDefinitions="190,*">
+                            <TextBlock Grid.Column="0"
+                                       Text="Кількість цитувань:"
+                                       VerticalAlignment="Center"/>
+                            <TextBox x:Name="DemoCitationCountTextBox"
+                                     Grid.Column="1"
+                                     Text="90"/>
+                        </Grid>
+
+                        <Button Content="Обчислити індекс цитування"
+                                HorizontalAlignment="Left"
+                                Click="CalculateCitationButton_Click"/>
+
+                        <TextBlock x:Name="CitationResultTextBlock"
+                                   Text="Виберіть наукову книгу."
+                                   TextWrapping="Wrap"
+                                   Foreground="#287A3D"/>
+
+                        <Separator/>
+
+                        <TextBlock Text="IComparableBook — порівняння книг"
+                                   FontWeight="Bold"
+                                   TextWrapping="Wrap"/>
+
+                        <Button Content="Порівняти вибрану книгу з іншими"
+                                HorizontalAlignment="Left"
+                                Click="CompareBooksButton_Click"/>
+
+                        <TextBlock x:Name="CompareResultTextBlock"
+                                   Text="Результат порівняння з'явиться тут."
+                                   TextWrapping="Wrap"
+                                   Foreground="#287A3D"/>
+
+                        <Separator/>
+
+                        <TextBlock Text="ElectronicBook — електронна книга"
+                                   FontWeight="Bold"
+                                   TextWrapping="Wrap"/>
+
+                        <Grid ColumnDefinitions="190,*">
+                            <TextBlock Grid.Column="0"
+                                       Text="Назва:"
+                                       VerticalAlignment="Center"/>
+                            <TextBox x:Name="ElectronicTitleTextBox"
+                                     Grid.Column="1"
+                                     PlaceholderText="Назва електронної книги"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="190,*">
+                            <TextBlock Grid.Column="0"
+                                       Text="Автор:"
+                                       VerticalAlignment="Center"/>
+                            <TextBox x:Name="ElectronicAuthorTextBox"
+                                     Grid.Column="1"
+                                     PlaceholderText="Автор електронної книги"/>
+                        </Grid>
+
+                        <Grid ColumnDefinitions="190,*">
+                            <TextBlock Grid.Column="0"
+                                       Text="Розмір файлу (МБ):"
+                                       VerticalAlignment="Center"/>
+                            <TextBox x:Name="ElectronicFileSizeTextBox"
+                                     Grid.Column="1"
+                                     PlaceholderText="Наприклад, 5"/>
+                        </Grid>
+
+                        <Button Content="Створити електронну книгу"
+                                HorizontalAlignment="Left"
+                                Click="CreateElectronicBookButton_Click"/>
+
+                        <TextBlock x:Name="ElectronicBookResultTextBlock"
+                                   Text="Електронну книгу ще не створено."
+                                   TextWrapping="Wrap"
+                                   Foreground="#287A3D"/>
+
+                    </StackPanel>
                 </GroupBox>
 
             </StackPanel>
